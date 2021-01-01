@@ -1,0 +1,4 @@
+text1.txt => 77777
+text2.txt => 78901
+text3.txt => 89012
+text4.txt => 98765
