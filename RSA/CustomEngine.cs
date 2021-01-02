@@ -16,7 +16,7 @@ namespace RSA {
 			Keys[1] = EmptyKey;
 			long i = 1;
 			while (true) {
-				long number = 6 * i - 1;
+				long number = 6 * i - 1; // 6 * i + 5
 
 				if ((n % number).IsZero) {
 					AddPrivateKey(n, number);

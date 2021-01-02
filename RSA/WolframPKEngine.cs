@@ -33,6 +33,8 @@ namespace RSA {
 		}
 
 		public override void FindPrivateKeys(BigInteger n) {
+			Keys[0] = EmptyKey;
+			Keys[1] = EmptyKey;
 			Compute(n).Wait();
 		}
 	}

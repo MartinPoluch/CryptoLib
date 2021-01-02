@@ -18,11 +18,12 @@ namespace RSA {
 		/**
 		 * (n, e) = verejny kluc
 		 * n = sucin dvoch velkych prvocisiel (p * q)
-		 * e = male prvocislo
+		 * e = male prvocislo, verejny exponent
 		 * y = zasifrovana sprava
 		 */
 		public BigInteger Decrypt(BigInteger n, BigInteger e, BigInteger y) {
 			PrivateKeysEngine.FindPrivateKeys(n); // najde dva privatne kluce (dve velke prvocisla)
+			Console.WriteLine();
 			Console.WriteLine($"p= {PrivateKeysEngine.Keys[0]}");
 			Console.WriteLine($"q= {PrivateKeysEngine.Keys[1]}");
 
@@ -32,12 +33,17 @@ namespace RSA {
 			Console.WriteLine($"fiN= {fiN}");
 
 			BigInteger d = BigInteger.ModularInverse(e, fiN); // privatny exponent
-			Console.WriteLine($"e*d = {BigInteger.Multiply(e, d)} (should be 1)");
+			Console.WriteLine($"d= {d}");
+			Console.WriteLine($"e*d % fiN = {BigInteger.Mod(BigInteger.Multiply(e, d), fiN)} (should be 1)");
 			Console.WriteLine($"Private key (n, d) = ({n}, {d})");
 
 			BigInteger decrypted = BigInteger.ModularPow(y, d, n); // desifrovana sprava
 			Console.WriteLine($"decrypted message= {decrypted}");
 			return decrypted;
+		}
+
+		public BigInteger Encrypt(BigInteger n, BigInteger e, BigInteger x) {
+			return BigInteger.ModularPow(x, e, n);
 		}
 	}
 }
